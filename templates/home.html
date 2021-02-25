@@ -1,0 +1,167 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+  	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- TODO: jquery add in local -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+		<script src="{% static 'js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+		<title>ToDo App | Tasks</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<!-- Image and text -->
+			<!-- TODO : add menu bar -->
+			<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+				<div class="navbar">
+					<a href="#" style="color: black">
+						<img src="{% static 'img/github.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+					</a>
+					ToDo App
+				</div>
+				{% if request.user.is_authenticated %}
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/">MyList</a>
+					  </li>
+				  </div>
+				  {% endif %}
+				  {% if not request.user.is_authenticated %}
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					</div>
+					<div class="d-flex">
+						<button class="btn btn-success mr-1" type="button" data-toggle="modal" data-target="#signInModal">Sign in</button>
+						<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#signUpModal">Sign up</button>
+					</div>
+					{% else %}
+						<div class="dropdown">
+							<button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{{ request.user.username }}
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Profile</a>
+							<a class="dropdown-item" href="logout/">Logout</a>
+							</div>
+						</div>
+					{% endif %}
+				
+			</nav>
+			<!-- Modal SignIn-->
+			<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="signInModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<form action="/signin/" method="post">
+							{% csrf_token %}
+							<h2 class="text-center">Sign in</h2>    
+							{{ signInForm }}
+							<br>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+							</div>
+							<!-- <div class="clearfix">
+								<a href="#" class="float-right">Forgot Password?</a>
+							</div>         -->
+						</form>
+					</div>
+					
+				</div>
+				</div>
+			</div>
+			<!-- Modal SignUp-->
+			<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="signInModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<form action="/signup/" method="post">
+							{% csrf_token %}
+							<h2 class="text-center">Sign up</h2>       
+							{{ signUpForm }}
+							<br>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Sign up</button>
+							</div>
+							<!-- <div class="clearfix">
+								<a href="#" class="float-right">Forgot Password?</a>
+							</div>         -->
+						</form>
+					</div>
+					
+				</div>
+				</div>
+			</div>
+			{% if not request.user.is_authenticated %}
+			<center>
+				<div class="col-md-6 ">
+					<div style="height: 60px;"></div>
+					<center>
+						<div class="alert alert-danger" role="alert">
+							First, Please Sign in!
+						</div>
+					</center>
+				</div>
+			</center>
+			{% else %}
+			<center>
+				<div style="height: 60px"></div>
+				<div class="col-md-10">
+					<table class="table">
+						<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Title</th>
+							<th scope="col">Created</th>
+							<th scope="col">Due on</th>
+							<th scope="col">Options</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+							<td>@fat</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+							<td>@twitter</td>
+						</tr>
+						
+						</tbody>
+					</table>
+				</div>
+			</center>
+			{% endif %}
+		</div>
+		
+	</body>
+
+</html>
