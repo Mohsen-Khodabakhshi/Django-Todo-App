@@ -4,7 +4,7 @@ It's a django ToDo app to schedule your works. You can add your works and see wh
 
 ## Usage
 
-It work in Python3.
+It works in Python3.
 
 ```bash
 git clone https://github.com/Mohsen-Khodabakhshi/Django-Todo-App.git
