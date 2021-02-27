@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+
+{% block head %}
+<title>ToDo App | Detail</title>
+{% endblock %}
+
+{% block main %}
+<div style="height: 30px"></div>
+    <center>
+        <div class="col-md-8">
+            <h1>{{todo.title}}</h1>
+            <p>{{todo.description}}</p>
+            <h6>Created at: <span class="badge badge-secondary">{{todo.created_at|date:'m/d/y H:i a'}}</span></h6>
+            <h6>Due on: <span class="badge badge-info">{{todo.due_on|date:'m/d/y H:i a'}}</span></h6>
+            {% if todo.done_time != None%}
+            <h6>Done time: <span class="badge badge-success">{{todo.done_time|date:'m/d/y H:i a'}}</span></h6>
+            {% endif %}
+        </div>
+    </center>
+{% endblock %}

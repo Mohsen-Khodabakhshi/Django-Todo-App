@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+
+{% block head %}
+<title>ToDo App | New</title>
+{% endblock %}
+
+{% block main %}
+<div style="height: 30px"></div>
+<div class="col-md-8">
+    <form action="/new/" method="post">
+        {% csrf_token %}
+        <h2>Create New ToDo</h2>       
+        {{ form }}
+        Due on:
+        <br>
+        <input class='form-control' name='due_on' id="due_on" type="text" value="2022-02-03 13:03">
+        <br>
+        <label for="color">Choose a color:</label>
+            <select class="form-control" name="color" id="color">
+            <option value="light">light</option>
+            <option value="info">info</option>
+            <option value="warning">warning</option>
+            <option value="danger">danger</option>
+            <option value="success">success</option>
+            </select> 
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Create</button>
+        </div>
+    </form>
+</div>
+<script>jQuery('#due_on').datetimepicker({format:'Y-m-d H:i'});</script>
+{% endblock %}

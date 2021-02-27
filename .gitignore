@@ -160,3 +160,4 @@ dmypy.json
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/django,vscode
+polar.py
